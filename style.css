@@ -1,0 +1,93 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #f9f5f5f9, #f9f5f5F9);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Main container */
+.quiz-container {
+  background: #fff;
+  color: #333;
+  max-width: 700px;
+  width: 90%;
+  margin: 30px auto;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Inputs and buttons */
+input[type="text"],
+select {
+  padding: 10px;
+  width: 90%;
+  font-size: 16px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #667eea;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #5a67d8;
+}
+
+/* Questions */
+.question {
+  margin: 20px 0;
+  text-align: left;
+}
+
+/* Result */
+#result {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+/* Timer */
+#timer {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .quiz-container {
+    padding: 20px 10px;
+  }
+
+  input[type="text"],
+  select {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  #result {
+    font-size: 16px;
+  }
+}

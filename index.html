@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Application</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Quiz Application</h1>
+
+    <!-- Timer Countdown Display -->
+    <p id="countdown" style="font-weight: bold; color: red;">Time Left: 00:00</p>
+
+    <div id="login-box">
+      <input type="text" id="username" placeholder="Enter your name" /><br><br>
+
+      <select id="category">
+        <option value="">Select Category</option>
+        <option value="General Knowledge">General Knowledge</option>
+        <option value="Math">Math</option>
+        <option value="Science">Science</option>
+        <option value="English">English</option>
+      </select><br><br>
+
+      <!-- Select Time -->
+      <label for="time-select">Select Time (in minutes):</label>
+      <select id="time-select">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+        <option value="60">60</option>
+      </select><br><br>
+
+      <button onclick="startQuiz()">Start Quiz</button>
+
+      <a href="/scoreboard">
+        <button>View Scoreboard</button>
+      </a>
+    </div>
+
+    <div id="quiz-section" style="display: none;">
+      <div id="quiz-box"></div>
+      <button onclick="submitQuiz()">Submit</button>
+      <div id="result"></div>
+      <div id="play-again" style="display: none;">
+      <br>
+    <button onclick="location.reload()">Play Again</button>  
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <script>
+    let countdownInterval;
+
+    function startCountdown(minutes) {
+      let seconds = minutes * 60;
+
+      countdownInterval = setInterval(() => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+
+        document.getElementById("countdown").innerText =
+          `Time Left: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+
+        if (seconds <= 0) {
+          clearInterval(countdownInterval);
+          alert("⏰ Time's up! Submitting your quiz.");
+          submitQuiz(); // Call your quiz submit function
+        }
+
+        seconds--;
+      }, 1000);
+    }
+
+    function startQuiz() {
+      const username = document.getElementById("username").value;
+      const category = document.getElementById("category").value;
+      const selectedTime = parseInt(document.getElementById("time-select").value);
+
+      if (!username || !category) {
+        alert("Please enter your name and select a category.");
+        return;
+      }
+
+      if (selectedTime > 60) {
+        alert("⚠️ Maximum time allowed is 60 minutes.");
+        return;
+      }
+
+      // Start countdown timer
+      startCountdown(selectedTime);
+
+      // Load questions as per your JS logic
+      loadQuestions(category);
+    }
+  </script>
+</body>
+</html>
